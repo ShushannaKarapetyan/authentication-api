@@ -1,2 +1,1 @@
-module.exports.UserSchema = require('./user');
-
+module.exports.UserSchema = require('./User');
