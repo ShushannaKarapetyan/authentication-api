@@ -1,6 +1,9 @@
-const {UserModel} = require('../models');
 const bcrypt = require('bcrypt');
 const JWT = require('jsonwebtoken');
+const {UserModel} = require('../models');
+const {ResponseHandler} = require('../utils');
+const {NotFoundError, ConflictError} = require('../errors');
+const {JWT_SECRET, PASSWORD_SALT} = process.env;
 
 class AuthController {
     async register(req, res, next) {
@@ -9,10 +12,10 @@ class AuthController {
             const user = await UserModel.findOne({email: email});
 
             if (user) {
-                throw new Error('This user already exists.');
+                throw new ConflictError('This user already exists.');
             }
 
-            const passwordHash = await bcrypt.hash(password, 10);
+            const passwordHash = await bcrypt.hash(password, PASSWORD_SALT);
 
             await UserModel.create({
                 username,
@@ -20,11 +23,11 @@ class AuthController {
                 password: passwordHash,
             });
 
-            return res.status(201).json({
-                message: 'User created successfully.'
-            });
+            return ResponseHandler.handleSuccess(res, {
+                message: 'User registered successfully.',
+            })
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 
@@ -34,30 +37,26 @@ class AuthController {
             const user = await UserModel.findOne({email});
 
             if (!user) {
-                return res.status(404).json({
-                    error: 'User not found.',
-                });
+                throw new NotFoundError('User not found.');
             }
 
             const matches = await bcrypt.compare(password, user.password);
 
             if (!matches) {
-                return res.status(404).json({
-                    error: 'User not found.',
-                });
+                throw new NotFoundError('User not found.');
             }
 
-            const token = JWT.sign({id: user.id, email: user.email},
-                process.env.JWT_SECRET,
+            const token = JWT.sign({id: user.id, email},
+                JWT_SECRET,
                 {expiresIn: 60 * 60}
             );
 
-            return res.status(200).json({
-                message: "You are successfully logged in.",
+            return ResponseHandler.handleSuccess(res, {
+                message: 'You are successfully logged in.',
                 token,
             });
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }
