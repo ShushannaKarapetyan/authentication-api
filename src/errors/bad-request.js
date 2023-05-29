@@ -1,13 +1,13 @@
 const CustomError = require('./custom-error');
 const HttpStatus = require('http-status-codes');
 
-class NotFoundError extends CustomError {
+class BadRequest extends CustomError {
     constructor(message) {
         super({
-            message,
-            status: HttpStatus.NOT_FOUND,
+            message: message,
+            status: HttpStatus.BAD_REQUEST,
         });
     }
 }
 
-module.exports = NotFoundError;
+module.exports = BadRequest;

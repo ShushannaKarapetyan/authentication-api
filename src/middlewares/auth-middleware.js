@@ -1,8 +1,8 @@
 const {Unauthorized} = require('../errors');
-const JWT = require("jsonwebtoken");
+const TokenLib = require('../libs/token');
 
 class AuthMiddleware {
-    static authorize(req, res, next) {
+    static async authorize(req, res, next) {
         try {
             const {authorization} = req.headers;
 
@@ -10,7 +10,7 @@ class AuthMiddleware {
                 throw new Unauthorized('User is not authorized.');
             }
 
-            // JWT.verify(authorization, process.env.JWT_SECRET);
+            req.userData = await TokenLib.verify(authorization);
 
             return next();
         } catch (error) {
