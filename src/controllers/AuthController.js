@@ -15,7 +15,7 @@ class AuthController {
                 throw new ConflictError('This user already exists.');
             }
 
-            const passwordHash = await bcrypt.hash(password, PASSWORD_SALT);
+            const passwordHash = await bcrypt.hash(password, parseInt(PASSWORD_SALT));
 
             await UserModel.create({
                 username,
