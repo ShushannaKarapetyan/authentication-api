@@ -5,7 +5,7 @@ const connectDB = require('./database/mongodb');
 const {AuthMiddleware} = require('./middlewares');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
-const options = require('./api-docs/options');
+const options = require('./api-doc/options');
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
@@ -16,7 +16,8 @@ const {
 } = require('./routes');
 
 app.use('/auth', authRouter);
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(options)));
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(options)));
+
 app.use(AuthMiddleware.authorize);
 app.use('/me', profileRouter);
 

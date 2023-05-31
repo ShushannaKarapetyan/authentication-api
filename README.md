@@ -24,3 +24,5 @@ The API allows users to register, login, and access their profiles.
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [joi](https://www.npmjs.com/package/joi)
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+* [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc)
+* [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
