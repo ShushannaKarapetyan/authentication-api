@@ -13,6 +13,7 @@ app.use(express.json());
 const {
     authRouter,
     profileRouter,
+    otpRouter,
 } = require('./routes');
 
 app.use('/auth', authRouter);
@@ -20,6 +21,7 @@ app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(options)));
 
 app.use(AuthMiddleware.authorize);
 app.use('/me', profileRouter);
+app.use('/auth/otp', otpRouter);
 
 connectDB()
     .then(() => {
