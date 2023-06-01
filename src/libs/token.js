@@ -1,5 +1,13 @@
 const JWT = require('jsonwebtoken');
 const {Unauthorized} = require('../errors');
+const {JWT_SECRET} = process.env;
+
+async function createToken(userInfo) {
+    return JWT.sign(userInfo,
+        JWT_SECRET,
+        {expiresIn: 60 * 60},
+    );
+}
 
 async function verify(authorization) {
     try {
@@ -11,4 +19,5 @@ async function verify(authorization) {
 
 module.exports = {
     verify,
+    createToken,
 }

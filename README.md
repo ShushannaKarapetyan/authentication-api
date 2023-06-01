@@ -1,6 +1,7 @@
 # user-authentication-api
 This is a simple user authentication API written in Node.js. 
 The API allows users to register, login, and access their profiles.
+Also added 2FA.
 
 ### How to setup
 - --
@@ -20,9 +21,11 @@ The API allows users to register, login, and access their profiles.
 * [mongoose](https://mongoosejs.com)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [dotenv](https://www.npmjs.com/package/dotenv)
+* [hi-base32](https://www.npmjs.com/package/hi-base32)
 * [http-status-codes](https://www.npmjs.com/package/http-status-codes)
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [joi](https://www.npmjs.com/package/joi)
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+* [otpauth](https://www.npmjs.com/package/otpauth)
 * [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc)
 * [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
