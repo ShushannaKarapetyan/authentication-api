@@ -1,8 +1,9 @@
 const bcrypt = require('bcrypt');
 const {UserModel} = require('../models');
 const {ResponseHandler} = require('../utils');
-const {NotFoundError, ConflictError, Unauthorized} = require('../errors');
+const {NotFoundError, ConflictError} = require('../errors');
 const TokenLib = require('../libs/token');
+const {PASSWORD_SALT} = process.env;
 
 class AuthController {
     async register(req, res, next) {

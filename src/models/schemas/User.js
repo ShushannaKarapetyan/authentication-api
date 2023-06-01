@@ -16,8 +16,14 @@ const UserSchema = new Schema({
         type: String,
         default: false,
     },
-    otp_base32: String,
-    otp_auth_url: String,
+    otp_base32: {
+        type: String,
+        default: null,
+    },
+    otp_auth_url: {
+        type: String,
+        default: null,
+    },
 }, {timestamps: {createdAt: 'createdAt', updatedAt: 'updatedAt'}});
 
 module.exports = UserSchema;

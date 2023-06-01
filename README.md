@@ -1,7 +1,7 @@
 # user-authentication-api
 This is a simple user authentication API written in Node.js. 
 The API allows users to register, login, and access their profiles.
-Also added 2FA.
+Also implemented 2FA.
 
 ### How to setup
 - --
